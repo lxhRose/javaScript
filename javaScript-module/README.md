@@ -1,0 +1,1 @@
+异步模块加载：程序设计的精妙之处在于，页面中使用F.module(['module/lib/dom'], function(dom){})时，相当于依赖了'module/lib/dom'模块，这时候会调用loadModule()函数，初始化依赖模块的缓存并且使用script标签将依赖文件加入页面；调用依赖文件又执行了F.module('module/lib/dom', function() {})，即该文件内的模块无依赖模块，执行setModule(url, [], callback);然后发现该模块被调用过（有缓存），修改模块状态和矫正模块接口，执行模块文件加载完成回调函数。至此，异步加载完成，设计极其巧妙。其实是由两次F.module()配合完成。
