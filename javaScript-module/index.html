@@ -7,16 +7,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
 </head>
-<body>
+<body style="margin: 0; padding: 0;">
     <div id="root">
-        验证成功！
+        <div id="content" style="background-color: green; color: #fff; padding: 20px">content_BOX</div>
+        <div style="padding: 20px;">
+            <button id="myBtn">设置元素内容</button>
+            <button id="reset">重置</button>
+        </div>
     </div>
 </body>
     <script type="text/javascript" src="./module/module.js"></script>
     <script type="text/javascript">
         window.onload = function() {
-            F.module(['module/lib/dom'], function(dom) {
-                dom.html('root');
+            F.module(['module/lib/dom', 'module/lib/event'], function(dom, event) { // 匿名模块，依赖dom模块、event模块
+                event.on('myBtn', 'click', function() {
+                    dom.html('content', dom.html('root')); // 将root的子元素设置到content内
+                });
+                event.on('reset', 'click', function() {
+                    dom.html('content', 'content_BOX');
+                });
             });
         }
     </script>
